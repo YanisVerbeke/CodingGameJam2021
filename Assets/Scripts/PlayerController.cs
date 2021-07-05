@@ -22,18 +22,15 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _speedForce = 8;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*_rigidbody.velocity = new Vector3(Input.GetAxis("Horizontal") * _speedForce, _rigidbody.velocity.y, 0);
-
-        */
-        if (_rigidbody.velocity.y < 0)
-        {
-            _rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
+        // Augmente la gravité en fonction de la vélocité y 
+        // Permet que ça ne dépasse pas un minimum
+        Physics.gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 8, -30, -20), 0);
     }
 
     private void OnMovement(InputValue value)
@@ -47,10 +44,7 @@ public class PlayerController : MonoBehaviour
         if (_onGrounded)
         {
             _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-            Debug.Log(transform.position.y);
             _onGrounded = false;
-            Debug.Log("en l air ");
-
         }
     }
 
@@ -71,6 +65,14 @@ public class PlayerController : MonoBehaviour
                 }
                 else _onGrounded = false;
             }
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Floor")
+        {
+            _onGrounded = false;
         }
     }
 }
