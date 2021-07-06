@@ -1,96 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody _rigidbody;
-    [SerializeField]
-    private int _speedForce;
-    [SerializeField]
-    private int _jumpForce;
-    [SerializeField]
-    private bool _onGrounded;
-    private bool _isJumping;
-
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
-
-    private Vector3 _movementVelocity;
-    private Vector3 _jumpVelocity;
-
     // Start is called before the first frame update
+
+    private List<GameObject> playerList;
+    
+    
+
     void Start()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _speedForce = 8;
-        _movementVelocity = new Vector3();
-        _jumpVelocity = new Vector3();
-        _isJumping = false;
+        playerList = new List<GameObject>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Augmente la gravité en fonction de la vélocité y 
-        // Permet que ça ne dépasse pas un minimum
-        Physics.gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 8, -30, -20), 0);
-
+        
     }
 
-    private void FixedUpdate()
+    public void AddPlayer(GameObject player)
     {
-        _rigidbody.AddForce(new Vector3(_movementVelocity.x - _rigidbody.velocity.x, 0, 0), ForceMode.VelocityChange);
+        playerList.Add(player);
+        SpawnPlayer(player);
+        Debug.Log("adding player ");
+    }
 
-        if (_isJumping)
+    private void SpawnPlayer(GameObject player)
+    {
+        int x_position = 0;
+        if (playerList.Count == 1)
         {
-            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-            _isJumping = false;
+            x_position = 0;
         }
-
-    }
-
-    private void OnMovement(InputValue value)
-    {
-        _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
-        Debug.Log(Mathf.Round(value.Get<Vector2>().x));
-    }
-
-    private void OnJump()
-    {
-        Debug.Log("Jump");
-        if (_onGrounded)
+        else if (playerList.Count == 2)
         {
-            _isJumping = true;
+            x_position = 3;
         }
+        player.transform.position = new Vector3(x_position, player.transform.position.y, player.transform.position.z);
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.tag == "Floor")
-        {
-            foreach (ContactPoint hitPos in collision.contacts)
-            {
-                if (hitPos.normal.x != 0) // check if the wall collided on the sides
-                {
-                    _onGrounded = false; // boolean to prevent player from being able to jump
-                }
-                else if (hitPos.normal.y > 0) // check if its collided on top 
-                {
-                    _onGrounded = true;
-                }
-                else _onGrounded = false;
-            }
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Floor")
-        {
-            _onGrounded = false;
-        }
-    }
 }
