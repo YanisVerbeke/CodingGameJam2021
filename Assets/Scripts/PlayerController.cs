@@ -13,16 +13,22 @@ public class PlayerController : MonoBehaviour
     private int _jumpForce;
     [SerializeField]
     private bool _onGrounded;
+    private bool _isJumping;
 
     public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
+
+    private Vector3 _movementVelocity;
+    private Vector3 _jumpVelocity;
 
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
         _speedForce = 8;
-
+        _movementVelocity = new Vector3();
+        _jumpVelocity = new Vector3();
+        _isJumping = false;
     }
 
     // Update is called once per frame
@@ -31,11 +37,25 @@ public class PlayerController : MonoBehaviour
         // Augmente la gravité en fonction de la vélocité y 
         // Permet que ça ne dépasse pas un minimum
         Physics.gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 8, -30, -20), 0);
+
+    }
+
+    private void FixedUpdate()
+    {
+        _rigidbody.AddForce(new Vector3(_movementVelocity.x - _rigidbody.velocity.x, 0, 0), ForceMode.VelocityChange);
+
+        if (_isJumping)
+        {
+            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            _isJumping = false;
+        }
+
     }
 
     private void OnMovement(InputValue value)
     {
-        _rigidbody.velocity = new Vector3(value.Get<Vector2>().x * _speedForce, _rigidbody.velocity.y, 0);
+        _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
+        Debug.Log(Mathf.Round(value.Get<Vector2>().x));
     }
 
     private void OnJump()
@@ -43,12 +63,11 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Jump");
         if (_onGrounded)
         {
-            _rigidbody.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-            _onGrounded = false;
+            _isJumping = true;
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == "Floor")
         {
@@ -60,7 +79,6 @@ public class PlayerController : MonoBehaviour
                 }
                 else if (hitPos.normal.y > 0) // check if its collided on top 
                 {
-                    //_rigidbody.velocity = new Vector3(_rigidbody.velocity.x, 0, 0);
                     _onGrounded = true;
                 }
                 else _onGrounded = false;
