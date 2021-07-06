@@ -21,14 +21,18 @@ public class PlayerController : MonoBehaviour
     private Vector3 _movementVelocity;
     private Vector3 _jumpVelocity;
 
+    private Vector3 _gravity;
+
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody.useGravity = false;
         _speedForce = 8;
         _movementVelocity = new Vector3();
         _jumpVelocity = new Vector3();
         _isJumping = false;
+        _gravity = Vector3.down;
     }
 
     // Update is called once per frame
@@ -36,7 +40,8 @@ public class PlayerController : MonoBehaviour
     {
         // Augmente la gravité en fonction de la vélocité y 
         // Permet que ça ne dépasse pas un minimum
-        Physics.gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 8, -30, -20), 0);
+        //Physics.gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 8, -30, -20), 0);
+        _gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 10, -30, -20), 0);
 
     }
 
@@ -50,6 +55,7 @@ public class PlayerController : MonoBehaviour
             _isJumping = false;
         }
 
+        _rigidbody.AddForce(_gravity * _rigidbody.mass, ForceMode.Acceleration);
     }
 
     private void OnMovement(InputValue value)
