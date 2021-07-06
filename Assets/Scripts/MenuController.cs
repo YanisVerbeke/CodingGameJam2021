@@ -21,7 +21,7 @@ public class MenuController : MonoBehaviour
     public void StartGame()
     {
         Debug.Log("Hayo");
-        SceneManager.LoadScene(sceneBuildIndex:1);
+        SceneManager.LoadScene(sceneBuildIndex:2);
 
     }
 

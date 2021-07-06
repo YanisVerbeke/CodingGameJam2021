@@ -9,14 +9,11 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("player state");
-        Debug.Log(PlayerState.test);
-
         for (int i = 0; i < PlayerState.playerList.Count; i++)
         {
-            int x_position = i == 0 ? 0 : 3 ;
+            int x_position = i == 0 ? -8 : 8 ;
 
-            PlayerState.playerList[i].transform.position = new Vector3(x_position, 1, 0);
+            PlayerState.playerList[i].transform.position = new Vector3(x_position, 2, 0);
         }
 
     }
