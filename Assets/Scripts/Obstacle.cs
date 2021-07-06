@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Obstacle : MonoBehaviour
 {
-    public GameObject linkedObstacle;
+    public GameObject linkedKey;
     public int Speed { get; set; }
 
     // Start is called before the first frame update
@@ -16,18 +16,19 @@ public class Key : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.down * Speed * Time.deltaTime);
+        transform.Translate(Vector3.down * Time.deltaTime * Speed);
+
+        if (transform.position.y < -2)
+        {
+            GameObject.Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            if (linkedObstacle != null)
-            {
-                Destroy(linkedObstacle);
-            }
-            Destroy(this.gameObject);
+            Destroy(other.gameObject);
         }
     }
 }
