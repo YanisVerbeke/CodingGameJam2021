@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     private Vector3 _movementVelocity;
     private Vector3 _gravity;
 
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,7 @@ public class Player : MonoBehaviour
     {
         _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
         Debug.Log(Mathf.Round(value.Get<Vector2>().x));
+        animator.SetInteger("dX", (int)Mathf.Round(value.Get<Vector2>().x));
     }
 
     private void OnJump()
