@@ -6,12 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    
+    MenuController _menuController;
     
 
     void Start()
     {
         PlayerState.playerList = new List<GameObject>();
+        _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
+
     }
 
     // Update is called once per frame
@@ -24,7 +26,10 @@ public class PlayerController : MonoBehaviour
     {
         PlayerState.playerList.Add(player);
         DontDestroyOnLoad(player);
+        _menuController.ChangeColorPink(PlayerState.playerList.Count);
     }
+
+
 
 
 
