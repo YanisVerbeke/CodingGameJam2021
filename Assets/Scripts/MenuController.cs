@@ -27,7 +27,7 @@ public class MenuController : MonoBehaviour
     {
         Debug.Log("Start");
         Debug.Log(PlayerState.playerList.Count);
-        if (PlayerState.playerList.Count >= 2)
+        if (PlayerState.playerList.Count >= 1)
         {
             Debug.Log("Succes");
 

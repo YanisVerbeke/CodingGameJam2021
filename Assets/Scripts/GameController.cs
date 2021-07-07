@@ -11,9 +11,9 @@ public class GameController : MonoBehaviour
     {
         for (int i = 0; i < PlayerState.playerList.Count; i++)
         {
-            int x_position = i == 0 ? -8 : 8 ;
+            int x_position = i == 0 ? -12 : 12 ;
 
-            PlayerState.playerList[i].transform.position = new Vector3(x_position, 2, 0);
+            PlayerState.playerList[i].transform.position = new Vector3(x_position, 4, 0);
         }
 
     }
