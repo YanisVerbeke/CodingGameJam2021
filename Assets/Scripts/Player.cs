@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerController : MonoBehaviour
+public class Player : MonoBehaviour
 {
     private Rigidbody _rigidbody;
     [SerializeField]
@@ -15,12 +15,7 @@ public class PlayerController : MonoBehaviour
     private bool _onGrounded;
     private bool _isJumping;
 
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
-
     private Vector3 _movementVelocity;
-    private Vector3 _jumpVelocity;
-
     private Vector3 _gravity;
 
     // Start is called before the first frame update
@@ -28,9 +23,10 @@ public class PlayerController : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _rigidbody.useGravity = false;
-        _speedForce = 8;
+        _speedForce = 10;
+        _jumpForce = 65;
+
         _movementVelocity = new Vector3();
-        _jumpVelocity = new Vector3();
         _isJumping = false;
         _gravity = Vector3.down;
     }
@@ -79,9 +75,12 @@ public class PlayerController : MonoBehaviour
         {
             foreach (ContactPoint hitPos in collision.contacts)
             {
-                if (hitPos.normal.x != 0) // check if the wall collided on the sides
+                if (hitPos.normal.x != 0 && !_onGrounded) // check if the wall collided on the sides
                 {
                     _onGrounded = false; // boolean to prevent player from being able to jump
+                } else if (hitPos.normal.x != 0 && _onGrounded)
+                {
+                    _onGrounded = true;
                 }
                 else if (hitPos.normal.y > 0) // check if its collided on top 
                 {
