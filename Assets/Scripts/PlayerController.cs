@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    
-    
+    public int Score { get; set; }
+
 
     void Start()
     {
@@ -25,7 +25,5 @@ public class PlayerController : MonoBehaviour
         PlayerState.playerList.Add(player);
         DontDestroyOnLoad(player);
     }
-
-
 
 }
