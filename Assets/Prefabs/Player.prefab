@@ -127,10 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speedForce: 10
-  _jumpForce: 65
+  _jumpForce: 100
   _onGrounded: 0
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
 --- !u!114 &-6097909388946657734
 MonoBehaviour:
   m_ObjectHideFlags: 0

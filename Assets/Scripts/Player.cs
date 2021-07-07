@@ -34,8 +34,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Augmente la gravité en fonction de la vélocité y 
-        // Permet que ça ne dépasse pas un minimum
+        // Augmente la gravit? en fonction de la v?locit? y 
+        // Permet que ?a ne d?passe pas un minimum
         //Physics.gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 8, -30, -20), 0);
         _gravity = new Vector3(0, Mathf.Clamp(-20 + _rigidbody.velocity.y * 10, -30, -20), 0);
 
@@ -73,9 +73,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
+            Debug.Log("colided with floor");
             foreach (ContactPoint hitPos in collision.contacts)
             {
-                if (hitPos.normal.x != 0 && !_onGrounded) // check if the wall collided on the sides
+                if (hitPos.normal.x > 0.1f && !_onGrounded) // check if the wall collided on the sides
                 {
                     _onGrounded = false; // boolean to prevent player from being able to jump
                 } else if (hitPos.normal.x != 0 && _onGrounded)
