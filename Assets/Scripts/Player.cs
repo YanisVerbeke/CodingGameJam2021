@@ -15,14 +15,19 @@ public class Player : MonoBehaviour
     private bool _onGrounded;
     private bool _isJumping;
 
+    private int _idPlayer;
+    private int _selectedSkin = 0;
+
     private Vector3 _movementVelocity;
     private Vector3 _gravity;
 
     public Animator animator;
 
     private PlayerController _playerController;
+    private MenuController _menuController;
 
     public int PlayerId { get; set; }
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +41,8 @@ public class Player : MonoBehaviour
         _isJumping = false;
         _gravity = Vector3.down;
         _playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-
+        _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
+        _idPlayer = PlayerState.playerList.Count+1;
         _playerController.AddPlayer(this.gameObject);
     }
 
@@ -66,17 +72,31 @@ public class Player : MonoBehaviour
     private void OnMovement(InputValue value)
     {
         _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
-        Debug.Log(Mathf.Round(value.Get<Vector2>().x));
+        //Debug.Log(Mathf.Round(value.Get<Vector2>().x));
         animator.SetInteger("dX", (int)Mathf.Round(value.Get<Vector2>().x));
     }
 
     private void OnJump()
     {
-        Debug.Log("Jump");
+        //Debug.Log("Jump");
         if (_onGrounded)
         {
             _isJumping = true;
         }
+    }
+
+    void OnTurnRight()
+    {
+        _selectedSkin++;
+        Debug.Log("Right" + _idPlayer);
+        _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
+    }
+    
+    void OnTurnLeft()
+    {
+        _selectedSkin--;
+        _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
+        Debug.Log("Left");
     }
 
     private void OnCollisionStay(Collision collision)
