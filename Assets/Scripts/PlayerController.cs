@@ -6,7 +6,11 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public int Score { get; set; }
+
+
     MenuController _menuController;
+
 
 
     private void Awake()
@@ -32,9 +36,4 @@ public class PlayerController : MonoBehaviour
         DontDestroyOnLoad(player);
         _menuController.ChangeColorPink(PlayerState.playerList.Count);
     }
-
-
-
-
-
 }

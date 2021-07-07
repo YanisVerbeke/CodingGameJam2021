@@ -40,7 +40,8 @@ public class Player : MonoBehaviour
         _movementVelocity = new Vector3();
         _isJumping = false;
         _gravity = Vector3.down;
-        _playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+
+        _playerController = GameObject.Find("GameController").GetComponent<PlayerController>();
         _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
         _idPlayer = PlayerState.playerList.Count+1;
         _playerController.AddPlayer(this.gameObject);
