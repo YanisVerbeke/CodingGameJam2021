@@ -113,9 +113,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
+            Debug.Log("colided with floor");
             foreach (ContactPoint hitPos in collision.contacts)
             {
-                if (hitPos.normal.x != 0 && !_onGrounded) // check if the wall collided on the sides
+                if (hitPos.normal.x > 0.1f && !_onGrounded) // check if the wall collided on the sides
                 {
                     _onGrounded = false; // boolean to prevent player from being able to jump
                 }
