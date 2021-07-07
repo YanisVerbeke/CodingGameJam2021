@@ -351,10 +351,10 @@ RectTransform:
   m_Father: {fileID: 444991780}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.078, y: 0.35175002}
-  m_AnchorMax: {x: 0.92200005, y: 0.92200005}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.17300001, y: 0.4311805}
+  m_AnchorMax: {x: 0.80415136, y: 0.8368195}
+  m_AnchoredPosition: {x: 0, y: -1}
+  m_SizeDelta: {x: 0, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &345220777
 MonoBehaviour:
@@ -1023,10 +1023,10 @@ RectTransform:
   m_Father: {fileID: 350299618}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.026, y: 0.039}
-  m_AnchorMax: {x: 1, y: 0.2654375}
-  m_AnchoredPosition: {x: -1.5, y: -0.59999084}
-  m_SizeDelta: {x: -1.4300003, y: -0.34680176}
+  m_AnchorMin: {x: 0.026, y: 0}
+  m_AnchorMax: {x: 1, y: 0.23785308}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036149195
 MonoBehaviour:
@@ -1082,7 +1082,7 @@ GameObject:
   - component: {fileID: 1136300129}
   - component: {fileID: 1136300128}
   m_Layer: 5
-  m_Name: Image_player_1 (1)
+  m_Name: mage_player_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1102,10 +1102,10 @@ RectTransform:
   m_Father: {fileID: 350299618}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.060637534, y: 0.35175002}
-  m_AnchorMax: {x: 0.92200005, y: 0.91715115}
-  m_AnchoredPosition: {x: -1.0301056, y: 0.5}
-  m_SizeDelta: {x: 2.0602112, y: 1}
+  m_AnchorMin: {x: 0.17300001, y: 0.3838531}
+  m_AnchorMax: {x: 0.86731243, y: 0.8364537}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1136300128
 MonoBehaviour:
