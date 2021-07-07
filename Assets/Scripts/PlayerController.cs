@@ -15,8 +15,10 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        PlayerState.playerList = new List<GameObject>();
-
+        if (PlayerState.playerList == null)
+        {
+            PlayerState.playerList = new List<GameObject>();
+        }
     }
     void Start()
     {
@@ -27,7 +29,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void AddPlayer(GameObject player)
