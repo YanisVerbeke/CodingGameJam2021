@@ -2,27 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; // This is so that it should find the Text component
+using UnityEngine.Events; // This is so that you can extend the pointer handlers
+using UnityEngine.EventSystems;
 
 public class MenuController : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] List<Sprite> ArrayOfSkin;
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
 
     public void StartGame()
     {
-        Debug.Log("Hayo");
-        SceneManager.LoadScene(sceneBuildIndex:2);
+        Debug.Log("Start");
+        Debug.Log(PlayerState.playerList.Count);
+        if (PlayerState.playerList.Count >= 2)
+        {
+            Debug.Log("Succes");
 
+            //PlayerState.playerList[0];
+            SceneManager.LoadScene(sceneBuildIndex: 2);
+        }
+
+    }
+
+    public void ChangeColorPink(int id_ping)
+    {
+        Debug.Log("I Ping");
+
+        GameObject.Find("PingConnected_" + id_ping).GetComponent<Text>().color = Color.green;
+    }
+
+    public int ChangeSkin(int nextSelected, int idPlayer)
+    {
+        Debug.Log("idPlayer : ");
+        Debug.Log(idPlayer);
+        Transform player = PlayerState.playerList[idPlayer-1].transform;
+
+        if (nextSelected >= ArrayOfSkin.Count)
+        {
+            nextSelected = 0;
+        }
+        else if (nextSelected <= -1)
+        {
+            nextSelected = ArrayOfSkin.Count -1;
+        }
+        GameObject.Find("Image_player_" + idPlayer).GetComponent<Image>().sprite = ArrayOfSkin[nextSelected];
+        ChangeStateChild(player);
+        player.GetChild(nextSelected).gameObject.SetActive(true);
+
+        PlayerState.playerList[idPlayer - 1].GetComponent<Player>().animator = PlayerState.playerList[idPlayer - 1].transform.GetChild(nextSelected).GetComponent<Animator>();
+
+        return nextSelected;
+    }
+
+
+    private void ChangeStateChild(Transform parentObject)
+    {
+        foreach (Transform child in parentObject)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 
 }
