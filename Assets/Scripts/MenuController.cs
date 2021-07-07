@@ -9,17 +9,19 @@ using UnityEngine.EventSystems;
 public class MenuController : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField] List<Sprite> ArrayOfSkin;
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
 
     public void StartGame()
     {
@@ -28,6 +30,7 @@ public class MenuController : MonoBehaviour
         if (PlayerState.playerList.Count >= 2)
         {
             Debug.Log("Succes");
+            //PlayerState.playerList[0];
             SceneManager.LoadScene(sceneBuildIndex: 2);
         }
 
@@ -35,7 +38,26 @@ public class MenuController : MonoBehaviour
 
     public void ChangeColorPink(int id_ping)
     {
+        Debug.Log("I Ping");
+
         GameObject.Find("PingConnected_" + id_ping).GetComponent<Text>().color = Color.green;
+    }
+
+    public int ChangeSkin(int nextSelected, int idPlayer)
+    {
+        Debug.Log(nextSelected);
+
+        if (nextSelected >= ArrayOfSkin.Count)
+        {
+            nextSelected = 0;
+        }
+        else if (nextSelected <= -1)
+        {
+            nextSelected = ArrayOfSkin.Count -1;
+        }
+        GameObject.Find("Image_player_" + idPlayer).GetComponent<Image>().sprite = ArrayOfSkin[nextSelected];
+
+        return nextSelected;
     }
 
 }

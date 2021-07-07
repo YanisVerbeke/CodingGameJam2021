@@ -226,6 +226,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2f025aa70accaf41b07c8c77a060175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ArrayOfSkin:
+  - {fileID: -6066232702199207012, guid: eccfcdcb1a8db1a499b9b17ed8eccf55, type: 3}
+  - {fileID: 9148218102415001212, guid: eccfcdcb1a8db1a499b9b17ed8eccf55, type: 3}
+  - {fileID: -3015550087559185803, guid: eccfcdcb1a8db1a499b9b17ed8eccf55, type: 3}
+  - {fileID: -6687118888478300917, guid: eccfcdcb1a8db1a499b9b17ed8eccf55, type: 3}
+  - {fileID: -6363662739518053053, guid: eccfcdcb1a8db1a499b9b17ed8eccf55, type: 3}
 --- !u!4 &192746511
 Transform:
   m_ObjectHideFlags: 0
@@ -378,7 +384,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 2d9fcb21d0bc58d4eb47a4af259a29c4, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1082,7 +1088,7 @@ GameObject:
   - component: {fileID: 1136300129}
   - component: {fileID: 1136300128}
   m_Layer: 5
-  m_Name: mage_player_2
+  m_Name: Image_player_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1129,7 +1135,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 2d9fcb21d0bc58d4eb47a4af259a29c4, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
