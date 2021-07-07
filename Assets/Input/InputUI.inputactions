@@ -1,0 +1,52 @@
+{
+    "name": "InputUI",
+    "maps": [
+        {
+            "name": "UI",
+            "id": "d568e0ad-9fe4-4be8-b470-e21183122838",
+            "actions": [
+                {
+                    "name": "TurnRight",
+                    "type": "Button",
+                    "id": "3fc06cb3-8791-4abe-819e-5b1c15645f0b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TurnLeft",
+                    "type": "Button",
+                    "id": "18c45f68-8529-4b7c-927d-b848e5ea4276",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f5eeb13e-31c4-4bb5-aec2-f691e8bc4d08",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0292169-a968-41fd-9ef7-cad215cd4df4",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TurnLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
