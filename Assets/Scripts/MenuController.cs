@@ -11,9 +11,9 @@ public class MenuController : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] List<Sprite> ArrayOfSkin;
 
+
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -27,12 +27,12 @@ public class MenuController : MonoBehaviour
     {
         Debug.Log("Start");
         Debug.Log(PlayerState.playerList.Count);
-        if (PlayerState.playerList.Count >= 2)
+        if (PlayerState.playerList.Count >= 1)
         {
             Debug.Log("Succes");
 
             //PlayerState.playerList[0];
-            SceneManager.LoadScene(sceneBuildIndex: 2);
+            SceneManager.LoadScene(sceneBuildIndex: 3);
         }
 
     }
@@ -42,6 +42,51 @@ public class MenuController : MonoBehaviour
         Debug.Log("I Ping");
 
         GameObject.Find("PingConnected_" + id_ping).GetComponent<Text>().color = Color.green;
+    }
+
+    public void StartMenu()
+    {
+        Debug.Log("pressed");
+        //GameObject _menuController = GameObject.Find("GameController").GetComponent<MenuController>().gameObject;
+        GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
+        bool isActive = _menuController.transform.Find("Options").gameObject.activeInHierarchy ? false :true ;
+        _menuController.transform.Find("Options").gameObject.SetActive(isActive);
+        Pause();
+
+
+    }
+
+    public void DisplayMenu()
+    {
+        GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
+        _menuController.transform.Find("Options").gameObject.SetActive(false);
+        _menuController.transform.Find("Die").gameObject.SetActive(false);
+        Pause();
+    }
+
+    private void DieMenu()
+    {
+        GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
+        bool isActive = _menuController.transform.Find("Die").gameObject.activeInHierarchy ? false : true;
+        _menuController.transform.Find("Die").gameObject.SetActive(isActive);
+        Pause();
+
+    }
+
+    private void Pause()
+    {
+        Time.timeScale = Time.timeScale == 0.0f ? 1.1f : 0.0f;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(sceneBuildIndex: 3);
+
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
 
     public int ChangeSkin(int nextSelected, int idPlayer)

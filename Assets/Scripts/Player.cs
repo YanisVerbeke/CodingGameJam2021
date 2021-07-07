@@ -95,6 +95,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OnMenu()
+    {
+        Debug.Log("pezqqzs");
+        _menuController.StartMenu();
+    }
+
     void OnTurnRight()
     {
         _selectedSkin++;
@@ -113,7 +119,7 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
-            Debug.Log("colided with floor");
+           // Debug.Log("colided with floor");
             foreach (ContactPoint hitPos in collision.contacts)
             {
                 if (hitPos.normal.x > 0.1f && !_onGrounded) // check if the wall collided on the sides
