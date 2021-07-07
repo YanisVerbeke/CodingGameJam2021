@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
+        _menuController = GameObject.Find("GameController").GetComponent<MenuController>();
 
     }
 

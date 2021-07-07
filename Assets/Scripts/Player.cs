@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         _gravity = Vector3.down;
 
         _playerController = GameObject.Find("GameController").GetComponent<PlayerController>();
-        _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
+        _menuController = GameObject.Find("GameController").GetComponent<MenuController>();
         _idPlayer = PlayerState.playerList.Count+1;
         _playerController.AddPlayer(this.gameObject);
         SetActiveAllChild(false);
