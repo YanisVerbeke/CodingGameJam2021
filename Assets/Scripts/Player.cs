@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
         _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
         _idPlayer = PlayerState.playerList.Count+1;
         _playerController.AddPlayer(this.gameObject);
+        SetActiveAllChild(false);
     }
 
     // Update is called once per frame
@@ -67,6 +68,14 @@ public class Player : MonoBehaviour
         }
 
         _rigidbody.AddForce(_gravity * _rigidbody.mass, ForceMode.Acceleration);
+    }
+
+    private void SetActiveAllChild(bool isActive)
+    {
+        foreach (Transform child in this.gameObject.transform)
+        {
+            child.gameObject.SetActive(isActive);
+        }
     }
 
     private void OnMovement(InputValue value)
