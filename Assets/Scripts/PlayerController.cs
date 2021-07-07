@@ -7,11 +7,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
 
     MenuController _menuController;
-    
 
-    void Start()
+
+    private void Awake()
     {
         PlayerState.playerList = new List<GameObject>();
+
+    }
+    void Start()
+    {
         _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
 
     }

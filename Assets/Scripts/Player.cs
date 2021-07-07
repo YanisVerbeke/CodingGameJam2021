@@ -66,13 +66,13 @@ public class Player : MonoBehaviour
     private void OnMovement(InputValue value)
     {
         _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
-        Debug.Log(Mathf.Round(value.Get<Vector2>().x));
+        //Debug.Log(Mathf.Round(value.Get<Vector2>().x));
         animator.SetInteger("dX", (int)Mathf.Round(value.Get<Vector2>().x));
     }
 
     private void OnJump()
     {
-        Debug.Log("Jump");
+        //Debug.Log("Jump");
         if (_onGrounded)
         {
             _isJumping = true;

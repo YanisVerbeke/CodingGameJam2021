@@ -23,8 +23,13 @@ public class MenuController : MonoBehaviour
 
     public void StartGame()
     {
-        Debug.Log("Hayo");
-        SceneManager.LoadScene(sceneBuildIndex:2);
+        Debug.Log("Start");
+        Debug.Log(PlayerState.playerList.Count);
+        if (PlayerState.playerList.Count >= 2)
+        {
+            Debug.Log("Succes");
+            SceneManager.LoadScene(sceneBuildIndex: 2);
+        }
 
     }
 
