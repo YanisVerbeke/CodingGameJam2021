@@ -82,8 +82,11 @@ public class Player : MonoBehaviour
 
     private void OnMovement(InputValue value)
     {
+        
         if (PlayerState.currentState == PlayerState.StateMenu.INGAME)
         {
+            Debug.Log("Move State");
+            Debug.Log(PlayerState.currentState);
             _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
             //Debug.Log(Mathf.Round(value.Get<Vector2>().x));
             animator.SetInteger("dX", (int)Mathf.Round(value.Get<Vector2>().x));

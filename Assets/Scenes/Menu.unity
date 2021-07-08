@@ -2149,9 +2149,9 @@ MonoBehaviour:
   - {fileID: -2623511773304992209, guid: eccfcdcb1a8db1a499b9b17ed8eccf55, type: 3}
   - {fileID: -7386253773339799520, guid: eccfcdcb1a8db1a499b9b17ed8eccf55, type: 3}
   ArrayOfNameSkin:
-  - Normal
-  - Distingued
-  - Bledar
-  - Bledar
-  - Bledar
-  - Bledar
+  - Untitled Honk
+  - Distinguished Honk
+  - Squid Honk
+  - Ross Honk
+  - Redneck Honk
+  - Divine Honk

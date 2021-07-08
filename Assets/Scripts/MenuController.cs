@@ -66,7 +66,7 @@ public class MenuController : MonoBehaviour
         bool isActive = _menuController.transform.Find("Options").gameObject.activeInHierarchy ? false :true ;
         _menuController.transform.Find("Options").gameObject.SetActive(isActive);
         Pause();
-        PlayerState.currentState = PlayerState.StateMenu.INPAUSE;
+        PlayerState.currentState = PlayerState.currentState == PlayerState.StateMenu.INPAUSE ? PlayerState.StateMenu.INGAME : PlayerState.StateMenu.INPAUSE ;
 
 
     }
@@ -80,7 +80,7 @@ public class MenuController : MonoBehaviour
         PlayerState.currentState = PlayerState.StateMenu.INGAME;
     }
 
-    private void DieMenu()
+    public void DieMenu()
     {
         GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
         bool isActive = _menuController.transform.Find("Die").gameObject.activeInHierarchy ? false : true;
@@ -97,7 +97,14 @@ public class MenuController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(sceneBuildIndex: 3);
+        PlayerState.playerList = new List<GameObject>();
+        foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            Destroy(player);
+        }
+        PlayerState.currentState = PlayerState.StateMenu.INMENU;
+        SceneManager.LoadScene(sceneBuildIndex: 0);
+        Time.timeScale = 1.0f;
 
     }
 

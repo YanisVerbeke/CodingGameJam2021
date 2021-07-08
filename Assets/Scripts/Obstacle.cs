@@ -7,9 +7,12 @@ public class Obstacle : MonoBehaviour
     public GameObject linkedKey;
     public int Speed { get; set; }
 
+    private MenuController _menuController;
+
     // Start is called before the first frame update
     void Start()
     {
+        _menuController = GameObject.Find("GameController").GetComponent<MenuController>();
     }
 
     // Update is called once per frame
@@ -28,6 +31,7 @@ public class Obstacle : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.SetActive(false);
+            _menuController.DieMenu();
             //Destroy(other.gameObject);
         }
     }
