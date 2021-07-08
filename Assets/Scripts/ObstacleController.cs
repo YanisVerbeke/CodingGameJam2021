@@ -37,13 +37,13 @@ public class ObstacleController : MonoBehaviour
             //Debug.Log(BarPosition);
             if (BarPosition < 5000)
             {
-                currentObstacle = Instantiate(obstaclePrefab, new Vector3(-8, 19, 0), new Quaternion());
-                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(2, 15), 20, 0), new Quaternion());
+                currentObstacle = Instantiate(obstaclePrefab, new Vector3(-12, 28, 0), new Quaternion());
+                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(2, 23), 29, 0), new Quaternion());
             }
             else
             {
-                currentObstacle = Instantiate(obstaclePrefab, new Vector3(8, 19, 0), new Quaternion());
-                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(-14, -1), 20, 0), new Quaternion());
+                currentObstacle = Instantiate(obstaclePrefab, new Vector3(12, 28, 0), new Quaternion());
+                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(-22, -1), 29, 0), new Quaternion());
             }
             Obstacle obstacle = currentObstacle.GetComponent<Obstacle>();
             Key key = currentKey.GetComponent<Key>();
