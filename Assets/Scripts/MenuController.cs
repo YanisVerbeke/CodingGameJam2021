@@ -58,7 +58,7 @@ public class MenuController : MonoBehaviour
             //PlayerState.playerList[0];
             PlayerState.currentState = PlayerState.StateMenu.INGAME;
 
-            SceneManager.LoadScene(sceneBuildIndex: 2);
+            SceneManager.LoadScene(sceneBuildIndex: 1);
         }
 
     }
