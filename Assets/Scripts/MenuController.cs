@@ -6,12 +6,13 @@ using UnityEngine.UI; // This is so that it should find the Text component
 using UnityEngine.Events; // This is so that you can extend the pointer handlers
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(AudioSource))]
 public class MenuController : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] List<Sprite> ArrayOfSkin;
     [SerializeField] List<string> ArrayOfNameSkin;
-
+    AudioSource audioSource;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class MenuController : MonoBehaviour
         {
             PlayerState.currentState = PlayerState.StateMenu.INMENU;
         }
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -42,7 +44,7 @@ public class MenuController : MonoBehaviour
             //PlayerState.playerList[0];
             PlayerState.currentState = PlayerState.StateMenu.INGAME;
 
-            SceneManager.LoadScene(sceneBuildIndex: 3);
+            SceneManager.LoadScene(sceneBuildIndex: 2);
         }
 
     }
@@ -50,12 +52,12 @@ public class MenuController : MonoBehaviour
     public void ChangeColorPink(int id_ping)
     {
         id_ping--;
-        Debug.Log("I Ping"+ id_ping);
+        Debug.Log("I Ping" + id_ping);
 
         GameObject.Find("PingConnected_" + id_ping).GetComponent<Text>().color = Color.green;
-        GameObject.Find("Text_left_"+ id_ping).GetComponent<Text>().text = "LB";
-        GameObject.Find("Text_right_"+ id_ping).GetComponent<Text>().text = "RB";
-        GameObject.Find("Text_press_"+ id_ping).GetComponent<Text>().text = "";
+        GameObject.Find("Text_left_" + id_ping).GetComponent<Text>().text = "LB";
+        GameObject.Find("Text_right_" + id_ping).GetComponent<Text>().text = "RB";
+        GameObject.Find("Text_press_" + id_ping).GetComponent<Text>().text = "";
     }
 
     public void StartMenu()
@@ -63,10 +65,10 @@ public class MenuController : MonoBehaviour
         Debug.Log("pressed");
         //GameObject _menuController = GameObject.Find("GameController").GetComponent<MenuController>().gameObject;
         GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
-        bool isActive = _menuController.transform.Find("Options").gameObject.activeInHierarchy ? false :true ;
+        bool isActive = _menuController.transform.Find("Options").gameObject.activeInHierarchy ? false : true;
         _menuController.transform.Find("Options").gameObject.SetActive(isActive);
         Pause();
-        PlayerState.currentState = PlayerState.currentState == PlayerState.StateMenu.INPAUSE ? PlayerState.StateMenu.INGAME : PlayerState.StateMenu.INPAUSE ;
+        PlayerState.currentState = PlayerState.currentState == PlayerState.StateMenu.INPAUSE ? PlayerState.StateMenu.INGAME : PlayerState.StateMenu.INPAUSE;
 
 
     }
@@ -92,7 +94,17 @@ public class MenuController : MonoBehaviour
 
     private void Pause()
     {
-        Time.timeScale = Time.timeScale == 0.0f ? 1.0f : 0.0f;
+        //Time.timeScale = Time.timeScale == 0.0f ? 1.0f : 0.0f;
+        if (Time.timeScale == 0.0f)
+        {
+            Time.timeScale = 1.0f;
+            audioSource.UnPause();
+        }
+        else
+        {
+            Time.timeScale = 0.0f;
+            audioSource.Pause();
+        }
     }
 
     public void Restart()
