@@ -40,10 +40,12 @@ public class Player : MonoBehaviour
         _movementVelocity = new Vector3();
         _isJumping = false;
         _gravity = Vector3.down;
-        _playerController = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
+
+        _playerController = GameObject.Find("GameController").GetComponent<PlayerController>();
+        _menuController = GameObject.Find("GameController").GetComponent<MenuController>();
         _idPlayer = PlayerState.playerList.Count+1;
         _playerController.AddPlayer(this.gameObject);
+        SetActiveAllChild(false);
     }
 
     // Update is called once per frame
@@ -67,6 +69,14 @@ public class Player : MonoBehaviour
         }
 
         _rigidbody.AddForce(_gravity * _rigidbody.mass, ForceMode.Acceleration);
+    }
+
+    private void SetActiveAllChild(bool isActive)
+    {
+        foreach (Transform child in this.gameObject.transform)
+        {
+            child.gameObject.SetActive(isActive);
+        }
     }
 
     private void OnMovement(InputValue value)
@@ -103,9 +113,10 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
+            Debug.Log("colided with floor");
             foreach (ContactPoint hitPos in collision.contacts)
             {
-                if (hitPos.normal.x != 0 && !_onGrounded) // check if the wall collided on the sides
+                if (hitPos.normal.x > 0.1f && !_onGrounded) // check if the wall collided on the sides
                 {
                     _onGrounded = false; // boolean to prevent player from being able to jump
                 }

@@ -30,6 +30,7 @@ public class MenuController : MonoBehaviour
         if (PlayerState.playerList.Count >= 1)
         {
             Debug.Log("Succes");
+
             //PlayerState.playerList[0];
             SceneManager.LoadScene(sceneBuildIndex: 2);
         }
@@ -45,7 +46,9 @@ public class MenuController : MonoBehaviour
 
     public int ChangeSkin(int nextSelected, int idPlayer)
     {
-        Debug.Log(nextSelected);
+        Debug.Log("idPlayer : ");
+        Debug.Log(idPlayer);
+        Transform player = PlayerState.playerList[idPlayer-1].transform;
 
         if (nextSelected >= ArrayOfSkin.Count)
         {
@@ -56,8 +59,21 @@ public class MenuController : MonoBehaviour
             nextSelected = ArrayOfSkin.Count -1;
         }
         GameObject.Find("Image_player_" + idPlayer).GetComponent<Image>().sprite = ArrayOfSkin[nextSelected];
+        ChangeStateChild(player);
+        player.GetChild(nextSelected).gameObject.SetActive(true);
+
+        PlayerState.playerList[idPlayer - 1].GetComponent<Player>().animator = PlayerState.playerList[idPlayer - 1].transform.GetChild(nextSelected).GetComponent<Animator>();
 
         return nextSelected;
+    }
+
+
+    private void ChangeStateChild(Transform parentObject)
+    {
+        foreach (Transform child in parentObject)
+        {
+            child.gameObject.SetActive(false);
+        }
     }
 
 }

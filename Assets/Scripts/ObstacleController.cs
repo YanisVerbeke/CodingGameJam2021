@@ -8,10 +8,12 @@ public class ObstacleController : MonoBehaviour
     public GameObject keyPrefab;
     private GameObject currentObstacle;
     private GameObject currentKey;
-    [SerializeField] int MinTimeSpawn;
-    [SerializeField] int MaxTimeSpawn;
+    public int MinTimeSpawn { get; set; }
+    public int MaxTimeSpawn { get; set; }
     private float TimeSpawnBar;
     private int BarPosition;
+
+    public float speed { get; set; }
 
 
 
@@ -19,6 +21,9 @@ public class ObstacleController : MonoBehaviour
     void Start()
     {
         TimeSpawnBar = Time.time;
+        speed = 3;
+        MaxTimeSpawn = 6;
+        MinTimeSpawn = 2;
         //currentBar = Instantiate(barPrefab, new Vector3(0, 10, 0), new Quaternion());
     }
 
@@ -32,20 +37,20 @@ public class ObstacleController : MonoBehaviour
             Debug.Log(BarPosition);
             if (BarPosition < 5000)
             {
-                currentObstacle = Instantiate(obstaclePrefab, new Vector3(-8, 19, 0), new Quaternion());
-                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(2, 15), 20, 0), new Quaternion());
+                currentObstacle = Instantiate(obstaclePrefab, new Vector3(-12, 28, 0), new Quaternion());
+                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(2, 23), 29, 0), new Quaternion());
             }
             else
             {
-                currentObstacle = Instantiate(obstaclePrefab, new Vector3(8, 19, 0), new Quaternion());
-                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(-14, -1), 20, 0), new Quaternion());
+                currentObstacle = Instantiate(obstaclePrefab, new Vector3(12, 28, 0), new Quaternion());
+                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(-22, -1), 29, 0), new Quaternion());
             }
             Obstacle obstacle = currentObstacle.GetComponent<Obstacle>();
             Key key = currentKey.GetComponent<Key>();
             obstacle.linkedKey = currentKey;
-            obstacle.Speed = 3;
+            obstacle.Speed = (int)speed;
             key.linkedObstacle = currentObstacle;
-            key.Speed = 3;
+            key.Speed = (int)speed;
 
             TimeSpawnBar = Random.Range(MinTimeSpawn, MaxTimeSpawn) + Time.time;
         }

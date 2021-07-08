@@ -6,24 +6,30 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    public int Score { get; set; }
+
+
     MenuController _menuController;
+
 
 
     private void Awake()
     {
-        PlayerState.playerList = new List<GameObject>();
-
+        if (PlayerState.playerList == null)
+        {
+            PlayerState.playerList = new List<GameObject>();
+        }
     }
     void Start()
     {
-        _menuController = GameObject.Find("MenuController").GetComponent<MenuController>();
+        _menuController = GameObject.Find("GameController").GetComponent<MenuController>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void AddPlayer(GameObject player)
@@ -32,9 +38,4 @@ public class PlayerController : MonoBehaviour
         DontDestroyOnLoad(player);
         _menuController.ChangeColorPink(PlayerState.playerList.Count);
     }
-
-
-
-
-
 }
