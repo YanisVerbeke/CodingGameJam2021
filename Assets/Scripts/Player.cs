@@ -43,9 +43,10 @@ public class Player : MonoBehaviour
 
         _playerController = GameObject.Find("GameController").GetComponent<PlayerController>();
         _menuController = GameObject.Find("GameController").GetComponent<MenuController>();
-        _idPlayer = PlayerState.playerList.Count+1;
+        _idPlayer = PlayerState.playerList.Count;
         _playerController.AddPlayer(this.gameObject);
         SetActiveAllChild(false);
+        _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
     }
 
     // Update is called once per frame
@@ -81,15 +82,19 @@ public class Player : MonoBehaviour
 
     private void OnMovement(InputValue value)
     {
-        _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
-        //Debug.Log(Mathf.Round(value.Get<Vector2>().x));
-        animator.SetInteger("dX", (int)Mathf.Round(value.Get<Vector2>().x));
+        if (PlayerState.currentState == PlayerState.StateMenu.INGAME)
+        {
+            _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
+            //Debug.Log(Mathf.Round(value.Get<Vector2>().x));
+            animator.SetInteger("dX", (int)Mathf.Round(value.Get<Vector2>().x));
+        }
+        
     }
 
     private void OnJump()
     {
         //Debug.Log("Jump");
-        if (_onGrounded)
+        if (_onGrounded && PlayerState.currentState == PlayerState.StateMenu.INGAME)
         {
             _isJumping = true;
         }
@@ -103,16 +108,25 @@ public class Player : MonoBehaviour
 
     void OnTurnRight()
     {
-        _selectedSkin++;
-        Debug.Log("Right" + _idPlayer);
-        _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
+        if (PlayerState.currentState == PlayerState.StateMenu.INMENU)
+        {
+            _selectedSkin++;
+            Debug.Log("Right" + _idPlayer);
+            Debug.Log("Right State" + PlayerState.currentState);
+            _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
+        }
+        
     }
     
     void OnTurnLeft()
     {
-        _selectedSkin--;
-        _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
-        Debug.Log("Left");
+        if (PlayerState.currentState == PlayerState.StateMenu.INMENU)
+        {
+            _selectedSkin--;
+            _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
+            Debug.Log("Left");
+        }
+       
     }
 
     private void OnCollisionStay(Collision collision)
