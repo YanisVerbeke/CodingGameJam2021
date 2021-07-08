@@ -13,20 +13,36 @@ public class MenuController : MonoBehaviour
     [SerializeField] List<string> ArrayOfNameSkin;
     [SerializeField] AudioSource audioSource;
 
+    private PlayerController playerController;
+    private int _displayedScore;
+    private bool _isDisplayingScore;
+    GameObject _menuController;
+
     void Start()
     {
         Debug.Log("PlayerState.currentState");
         Debug.Log(PlayerState.currentState);
+        playerController = GetComponent<PlayerController>();
         if (PlayerState.currentState == PlayerState.StateMenu.INMENU)
         {
             PlayerState.currentState = PlayerState.StateMenu.INMENU;
         }
+        _displayedScore = 0;
+        _isDisplayingScore = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (_isDisplayingScore && _menuController != null)
+        {
+            if (_displayedScore < playerController.Score)
+            {
+                _displayedScore += 10;
+            }
+            Debug.Log(_menuController.transform.Find("ScoreEndText"));
+            _menuController.transform.Find("Die").gameObject.transform.Find("ScoreEndText").gameObject.GetComponent<Text>().text = _displayedScore.ToString();
+        }
     }
 
 
@@ -98,9 +114,11 @@ public class MenuController : MonoBehaviour
 
     public void DieMenu()
     {
-        GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
+        _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
         bool isActive = _menuController.transform.Find("Die").gameObject.activeInHierarchy ? false : true;
         _menuController.transform.Find("Die").gameObject.SetActive(isActive);
+        _displayedScore = 0;
+        _isDisplayingScore = true;
         Pause();
         PlayerState.currentState = PlayerState.StateMenu.INPAUSE;
 

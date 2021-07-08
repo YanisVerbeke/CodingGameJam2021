@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour
 
     public void SetCountScore()
     {
-        ScoreText.text = "SCORE : " + Score.ToString();
+        if (PlayerState.currentState == PlayerState.StateMenu.INGAME)
+        {
+            ScoreText.text = "SCORE : " + Score.ToString();
+        }
     }
 }
