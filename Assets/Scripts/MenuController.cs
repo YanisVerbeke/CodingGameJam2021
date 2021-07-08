@@ -6,13 +6,12 @@ using UnityEngine.UI; // This is so that it should find the Text component
 using UnityEngine.Events; // This is so that you can extend the pointer handlers
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(AudioSource))]
 public class MenuController : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] List<Sprite> ArrayOfSkin;
     [SerializeField] List<string> ArrayOfNameSkin;
-    AudioSource audioSource;
+    [SerializeField] AudioSource audioSource;
 
     void Start()
     {
@@ -22,7 +21,6 @@ public class MenuController : MonoBehaviour
         {
             PlayerState.currentState = PlayerState.StateMenu.INMENU;
         }
-        audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,18 +61,34 @@ public class MenuController : MonoBehaviour
     public void StartMenu()
     {
         Debug.Log("pressed");
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
+        if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
+        else
+        {
+            audioSource.UnPause();
+        }
         //GameObject _menuController = GameObject.Find("GameController").GetComponent<MenuController>().gameObject;
         GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
         bool isActive = _menuController.transform.Find("Options").gameObject.activeInHierarchy ? false : true;
         _menuController.transform.Find("Options").gameObject.SetActive(isActive);
         Pause();
         PlayerState.currentState = PlayerState.currentState == PlayerState.StateMenu.INPAUSE ? PlayerState.StateMenu.INGAME : PlayerState.StateMenu.INPAUSE;
-
-
     }
 
     public void DisplayMenu()
     {
+        audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
+        if (audioSource.isPlaying)
+        {
+            audioSource.Pause();
+        }
+        else
+        {
+            audioSource.UnPause();
+        }
         GameObject _menuController = GameObject.Find("Menu").GetComponent<MenuController>().gameObject;
         _menuController.transform.Find("Options").gameObject.SetActive(false);
         _menuController.transform.Find("Die").gameObject.SetActive(false);
@@ -94,17 +108,7 @@ public class MenuController : MonoBehaviour
 
     private void Pause()
     {
-        //Time.timeScale = Time.timeScale == 0.0f ? 1.0f : 0.0f;
-        if (Time.timeScale == 0.0f)
-        {
-            Time.timeScale = 1.0f;
-            audioSource.UnPause();
-        }
-        else
-        {
-            Time.timeScale = 0.0f;
-            audioSource.Pause();
-        }
+        Time.timeScale = Time.timeScale == 0.0f ? 1.0f : 0.0f;
     }
 
     public void Restart()

@@ -3298,6 +3298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArrayOfSkin: []
   ArrayOfNameSkin: []
+  audioSource: {fileID: 0}
 --- !u!114 &1933015317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3782,3 +3783,4 @@ MonoBehaviour:
   - Ross Honk
   - Redneck Honk
   - Divine Honk
+  audioSource: {fileID: 0}

@@ -30,29 +30,31 @@ public class ObstacleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (Time.time > TimeSpawnBar)
+        if (PlayerState.currentState == PlayerState.StateMenu.INGAME)
         {
-            BarPosition = Random.Range(0, 10000);
-            //Debug.Log(BarPosition);
-            if (BarPosition < 5000)
+            if (Time.time > TimeSpawnBar)
             {
-                currentObstacle = Instantiate(obstaclePrefab, new Vector3(-12, 28, 0), new Quaternion());
-                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(2, 23), 29, 0), new Quaternion());
-            }
-            else
-            {
-                currentObstacle = Instantiate(obstaclePrefab, new Vector3(12, 28, 0), new Quaternion());
-                currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(-22, -1), 29, 0), new Quaternion());
-            }
-            Obstacle obstacle = currentObstacle.GetComponent<Obstacle>();
-            Key key = currentKey.GetComponent<Key>();
-            obstacle.linkedKey = currentKey;
-            obstacle.Speed = (int)speed;
-            key.linkedObstacle = currentObstacle;
-            key.Speed = (int)speed;
+                BarPosition = Random.Range(0, 10000);
+                //Debug.Log(BarPosition);
+                if (BarPosition < 5000)
+                {
+                    currentObstacle = Instantiate(obstaclePrefab, new Vector3(-12, 28, 0), new Quaternion());
+                    currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(2, 23), 29, 0), new Quaternion());
+                }
+                else
+                {
+                    currentObstacle = Instantiate(obstaclePrefab, new Vector3(12, 28, 0), new Quaternion());
+                    currentKey = Instantiate(keyPrefab, new Vector3(Random.Range(-22, -1), 29, 0), new Quaternion());
+                }
+                Obstacle obstacle = currentObstacle.GetComponent<Obstacle>();
+                Key key = currentKey.GetComponent<Key>();
+                obstacle.linkedKey = currentKey;
+                obstacle.Speed = (int)speed;
+                key.linkedObstacle = currentObstacle;
+                key.Speed = (int)speed;
 
-            TimeSpawnBar = Random.Range(MinTimeSpawn, MaxTimeSpawn) + Time.time;
+                TimeSpawnBar = Random.Range(MinTimeSpawn, MaxTimeSpawn) + Time.time;
+            }
         }
     }
 }
