@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public List<GameObject> map;
+    
 
     void Start()
     {
@@ -23,4 +25,12 @@ public class GameController : MonoBehaviour
     {
         
     }
+
+    void LoadLevel()
+    {
+        System.Random random = new System.Random();
+        int num = random.Next(0, 1);
+        SceneManager.LoadScene(map[num].ToString());        
+    }
+
 }
