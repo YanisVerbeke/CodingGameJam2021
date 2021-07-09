@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
 
         int num = random.Next(0, map.Count);
         Instantiate(map[num], new Vector3(-12, 0, 0), new Quaternion());
-        int num2 = random.Next(0, 1);
+        int num2 = random.Next(0, map.Count);
         Instantiate(map[num2], new Vector3(12, 0, 0), new Quaternion());
     }
 
