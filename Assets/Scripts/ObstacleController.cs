@@ -35,7 +35,6 @@ public class ObstacleController : MonoBehaviour
             if (Time.time > TimeSpawnBar)
             {
                 BarPosition = Random.Range(0, 10000);
-                //Debug.Log(BarPosition);
                 if (BarPosition < 5000)
                 {
                     currentObstacle = Instantiate(obstaclePrefab, new Vector3(-12, 28, 0), new Quaternion());

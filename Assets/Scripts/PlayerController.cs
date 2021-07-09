@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _menuController = GameObject.Find("GameController").GetComponent<MenuController>();
-        ScoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        ScoreText = GameObject.Find("Menu").gameObject.transform.Find("ScorePanel").gameObject.transform.Find("Image").gameObject.transform.Find("ScoreText").GetComponent<Text>();
 
     }
 

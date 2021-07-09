@@ -85,10 +85,7 @@ public class Player : MonoBehaviour
         
         if (PlayerState.currentState == PlayerState.StateMenu.INGAME)
         {
-            Debug.Log("Move State");
-            Debug.Log(PlayerState.currentState);
             _movementVelocity = Vector3.right * Mathf.Round(value.Get<Vector2>().x) * _speedForce;
-            //Debug.Log(Mathf.Round(value.Get<Vector2>().x));
             animator.SetInteger("dX", (int)Mathf.Round(value.Get<Vector2>().x));
         }
         
@@ -96,7 +93,6 @@ public class Player : MonoBehaviour
 
     private void OnJump()
     {
-        //Debug.Log("Jump");
         if (_onGrounded && PlayerState.currentState == PlayerState.StateMenu.INGAME)
         {
             _isJumping = true;
@@ -105,7 +101,6 @@ public class Player : MonoBehaviour
 
     void OnMenu()
     {
-        Debug.Log("pezqqzs");
         _menuController.StartMenu();
     }
 
@@ -114,8 +109,6 @@ public class Player : MonoBehaviour
         if (PlayerState.currentState == PlayerState.StateMenu.INMENU)
         {
             _selectedSkin++;
-            Debug.Log("Right" + _idPlayer);
-            Debug.Log("Right State" + PlayerState.currentState);
             _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
         }
         
@@ -127,7 +120,6 @@ public class Player : MonoBehaviour
         {
             _selectedSkin--;
             _selectedSkin = _menuController.ChangeSkin(_selectedSkin, _idPlayer);
-            Debug.Log("Left");
         }
        
     }
@@ -136,7 +128,6 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.tag == "Floor")
         {
-           // Debug.Log("colided with floor");
             foreach (ContactPoint hitPos in collision.contacts)
             {
                 if (hitPos.normal.x > 0.1f && !_onGrounded) // check if the wall collided on the sides

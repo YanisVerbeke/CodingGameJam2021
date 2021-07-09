@@ -31,8 +31,6 @@ public class Key : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             playerController.Score += 100;
-            Debug.Log("Le score : ");
-            //Debug.Log(playerController.Score);
             if(playerController.Score % 500 == 0)
             {
                 obstacleController.speed += 1;

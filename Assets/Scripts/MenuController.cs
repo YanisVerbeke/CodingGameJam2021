@@ -20,8 +20,6 @@ public class MenuController : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("PlayerState.currentState");
-        Debug.Log(PlayerState.currentState);
         playerController = GetComponent<PlayerController>();
         if (PlayerState.currentState == PlayerState.StateMenu.INMENU)
         {
@@ -40,7 +38,6 @@ public class MenuController : MonoBehaviour
             {
                 _displayedScore += 10;
             }
-            Debug.Log(_menuController.transform.Find("ScoreEndText"));
             _menuController.transform.Find("Die").gameObject.transform.Find("ScoreEndText").gameObject.GetComponent<Text>().text = _displayedScore.ToString();
         }
     }
@@ -49,11 +46,8 @@ public class MenuController : MonoBehaviour
     public void StartGame()
     {
 
-        Debug.Log("Start");
-        Debug.Log(PlayerState.playerList.Count);
         if (PlayerState.playerList.Count >= 1)
         {
-            Debug.Log("Succes");
 
             //PlayerState.playerList[0];
             PlayerState.currentState = PlayerState.StateMenu.INGAME;
@@ -66,7 +60,6 @@ public class MenuController : MonoBehaviour
     public void ChangeColorPink(int id_ping)
     {
         id_ping--;
-        Debug.Log("I Ping" + id_ping);
 
         GameObject.Find("PingConnected_" + id_ping).GetComponent<Text>().color = Color.green;
         GameObject.Find("Text_left_" + id_ping).GetComponent<Text>().text = "LB";
@@ -76,7 +69,6 @@ public class MenuController : MonoBehaviour
 
     public void StartMenu()
     {
-        Debug.Log("pressed");
         audioSource = GameObject.Find("AudioSource").GetComponent<AudioSource>();
         if (audioSource.isPlaying)
         {
@@ -149,8 +141,6 @@ public class MenuController : MonoBehaviour
 
     public int ChangeSkin(int nextSelected, int idPlayer)
     {
-        Debug.Log("idPlayer : ");
-        Debug.Log(idPlayer);
         Transform player = PlayerState.playerList[idPlayer].transform;
 
         if (nextSelected >= ArrayOfSkin.Count)
